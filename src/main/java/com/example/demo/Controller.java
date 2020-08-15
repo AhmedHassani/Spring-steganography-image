@@ -36,13 +36,14 @@ public class Controller {
     }
 
     @RequestMapping(value = {"/get",""}, method = RequestMethod.POST)
-    public byte[] decodeing(@RequestParam("file") MultipartFile image,@RequestPart(value = "pass", required = true) String password) throws IOException {
+    public ResponseValue decodeing(@RequestParam("file") MultipartFile image, @RequestPart(value = "pass", required = true) String password) throws IOException {
         System.out.println("Decoder....");
         InputStream inputStream =image.getInputStream();
         char [] pass=password.toCharArray();
         StegDym stegDym=new StegDym();
         stegDym.read(inputStream,pass);
-        return  stegDym.getFileResult();
+        String en=Base64.getEncoder().encodeToString( stegDym.getFileResult());
+        return new ResponseValue(en);
 
     }
 

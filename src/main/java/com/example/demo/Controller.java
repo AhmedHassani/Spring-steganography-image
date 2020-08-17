@@ -31,8 +31,7 @@ public class Controller {
         stegDym.write(inputStream,bytesFiles,2,pass,nameFile);
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
         ImageIO.write(stegDym.getStegImg(), "png", baos);
-        String en=Base64.getEncoder().encodeToString(baos.toByteArray());
-        return new ResponseValue(en);
+        return new ResponseValue(baos.toByteArray());
     }
 
     @RequestMapping(value = {"/get",""}, method = RequestMethod.POST)
@@ -42,8 +41,7 @@ public class Controller {
         char [] pass=password.toCharArray();
         StegDym stegDym=new StegDym();
         stegDym.read(inputStream,pass);
-        String en=Base64.getEncoder().encodeToString( stegDym.getFileResult());
-        return new ResponseValue(en);
+        return new ResponseValue(stegDym.getFileResult());
 
     }
 

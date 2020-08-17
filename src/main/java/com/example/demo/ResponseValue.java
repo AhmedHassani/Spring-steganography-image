@@ -3,19 +3,19 @@ package com.example.demo;
 import java.util.Date;
 
 public class ResponseValue {
-   private String data ;
+   private byte [] data ;
    private Date time;
 
-    public ResponseValue(String data) {
+    public ResponseValue(byte [] data) {
         this.data = data;
         this.time = new Date();
     }
 
-    public String getData() {
+    public byte [] getData() {
         return data;
     }
 
-    public void setData(String data) {
+    public void setData(byte []data) {
         this.data = data;
     }
 

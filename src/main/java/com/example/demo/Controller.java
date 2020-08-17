@@ -29,7 +29,7 @@ public class Controller {
         }
         stegDym.write(inputStream,bytesFiles,2,pass,nameFile);
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        ImageIO.write(stegDym.getStegImg(), "png", baos);
+        ImageIO.write(stegDym.getStegImg(), "PNG", baos);
         return baos.toByteArray();
     }
 

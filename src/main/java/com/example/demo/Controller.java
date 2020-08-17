@@ -6,14 +6,13 @@ import org.springframework.web.multipart.MultipartFile;
 
 import javax.imageio.ImageIO;
 import java.io.*;
-import java.util.Base64;
 
 @RestController
 public class Controller {
 
 
     @RequestMapping(value = {"/get1"}, method = RequestMethod.POST)
-    public ResponseValue uploadingPost(@RequestParam("file") MultipartFile[] uploadingFiles,@RequestPart(value = "password", required = true) String password) throws IOException {
+    public byte[] uploadingPost(@RequestParam("file") MultipartFile[] uploadingFiles, @RequestPart(value = "password", required = true) String password) throws IOException {
         System.out.println("Encode....");
         byte [] bytesFiles=null;
         InputStream inputStream = null;
@@ -31,7 +30,7 @@ public class Controller {
         stegDym.write(inputStream,bytesFiles,2,pass,nameFile);
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
         ImageIO.write(stegDym.getStegImg(), "png", baos);
-        return new ResponseValue(baos.toByteArray());
+        return baos.toByteArray();
     }
 
     @RequestMapping(value = {"/get",""}, method = RequestMethod.POST)
